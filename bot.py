@@ -1,3 +1,5 @@
+from keep_alive import keep_alive
+keep_alive()
 import os
 import json
 import subprocess
@@ -254,3 +256,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
