@@ -1,0 +1,21 @@
+# Use lightweight Python 3.12 image
+FROM python:3.12-slim
+
+# Install ffmpeg for voice conversion
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+
+# Set working directory inside container
+WORKDIR /app
+
+# Copy Python requirements and install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy all bot files into the container
+COPY . .
+
+# Set environment variable placeholder (Fly.io secret will override this)
+ENV TOKEN=""
+
+# Command to run the bot
+CMD ["python", "bot.py"]
